@@ -58,3 +58,40 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# ----------------------------"TRASH ZOMBIES" 2023 SPRING (APRIL) ENTRY FOR GAMES JOBS FAIR GAME JAM - HELSINKI ---------------------------------
+#
+## PUT IGNORES for ALL THIRD PARTY ASSET FOLDERS HERE (these need to be downloaded from Unity Asset Store - especially 1.6GB "Terrain Asset Samples" folder)
+#
+
+/Assets/Asphalt_materials/*
+/Assets/HurlyBurly/*
+/Assets/Medieval\ Bridge/*
+/Assets/ModularLowPolyStreetsFree/*
+/Assets/PBR_Grass_Textures/*
+/Assets/RPG_FPS_game_assets_industrial/*
+/Assets/TerrainSampleAssets/*
+
+
+
+# /Assets/
+
+# META FILE SECTION SHOULD BE HERE AS GIT PROCESSES GITIGNORE file SEQUENTIALLY (I THINK)
+#  - ENSURE YOU DON'T IGNORE META FILES WHEN IGNORING ASSET FOLDERS
+#  - Note use of "BACKSLASH and a Space" escape sequence in filepaths that have spaces in directory name
+#    to ensure processed correctly
+
+#!/Assets/**/*.meta
+
+!/Assets/Asphalt_materials/*.meta
+!/Assets/HurlyBurly/*.meta
+!/Assets/Medieval\ Bridge/*.meta
+!/Assets/ModularLowPolyStreetsFree/*.meta
+!/Assets/PBR_Grass_Textures/*.meta
+!/Assets/RPG_FPS_game_assets_industrial/*.meta
+!/Assets/TerrainSampleAssets/*.meta
+
+
+
+
+
+
