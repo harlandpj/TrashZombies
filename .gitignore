@@ -58,37 +58,45 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-# ----------------------------"TRASH ZOMBIES" 2023 SPRING (APRIL) ENTRY FOR GAMES JOBS FAIR GAME JAM - HELSINKI ---------------------------------
+# ----------------------------TRASH ZOMBIES ---------------------------------
 #
 ## PUT IGNORES for ALL THIRD PARTY ASSET FOLDERS HERE (these need to be downloaded from Unity Asset Store - especially 1.6GB "Terrain Asset Samples" folder)
 #
-
+/Assets/AllSkyFree/*
 /Assets/Asphalt_materials/*
+/Assets/Conifers\ [BOTD]/*
 /Assets/HurlyBurly/*
 /Assets/Medieval\ Bridge/*
 /Assets/ModularLowPolyStreetsFree/*
+/Assets/Nature\ Low-Poly\ Pack\ By\ TexTheMess/*
 /Assets/PBR_Grass_Textures/*
+/Assets/Rocks\ and\ Boulders\ 2/*
 /Assets/RPG_FPS_game_assets_industrial/*
 /Assets/TerrainSampleAssets/*
-
+/Assets/TextMesh\ Pro/*
 
 
 # /Assets/
 
 # META FILE SECTION SHOULD BE HERE AS GIT PROCESSES GITIGNORE file SEQUENTIALLY (I THINK)
+#
 #  - ENSURE YOU DON'T IGNORE META FILES WHEN IGNORING ASSET FOLDERS
-#  - Note use of "BACKSLASH and a Space" escape sequence in filepaths that have spaces in directory name
+#
+#  - Note use of "BACKSLASH and SPACE" escape sequence in filepaths that have spaces in directory name!
 #    to ensure processed correctly
 
-#!/Assets/**/*.meta
-
+!/Assets/AllSkyFree/*.meta
 !/Assets/Asphalt_materials/*.meta
+!/Assets/Conifers\ [BOTD]/*.meta
 !/Assets/HurlyBurly/*.meta
 !/Assets/Medieval\ Bridge/*.meta
 !/Assets/ModularLowPolyStreetsFree/*.meta
+!/Assets/Nature\ Low-Poly\ Pack\ By\ TexTheMess/*.meta
 !/Assets/PBR_Grass_Textures/*.meta
+!/Assets/Rocks\ and\ Boulders\ 2/*.meta
 !/Assets/RPG_FPS_game_assets_industrial/*.meta
 !/Assets/TerrainSampleAssets/*.meta
+!/Assets/TextMesh\ Pro/*.meta
 
 
 

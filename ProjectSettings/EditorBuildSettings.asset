@@ -6,8 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Playground.unity
-    guid: e9017d5f96b9f09489b4b37e1d6eb914
+    path: Assets/Scenes/Main Menu Scene.unity
+    guid: 938b48af6e33f3a4cb801dbb8ba7c833
+  - enabled: 1
+    path: Assets/Scenes/ZombieCity.unity
+    guid: 5d9c1a1295879c74d9113ad502e6dd40
+  - enabled: 1
+    path: Assets/Scenes/GameOverPanel.unity
+    guid: 9080b293d1215af4c83bbcf346507234
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7,
       type: 2}
