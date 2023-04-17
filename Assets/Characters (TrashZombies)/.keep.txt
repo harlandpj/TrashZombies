@@ -1,0 +1,1 @@
+make Git keep this folder structure!
