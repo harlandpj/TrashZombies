@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1f;
         UnityEngine.RenderSettings.skybox = null;
     }
 
@@ -16,11 +17,13 @@ public class MainMenu : MonoBehaviour
     {
         
     }
+
     public void SwitchToGameScene()
     {
-        // swithc to main game - scene 1 in build order
-        SceneManager.LoadScene(1);
+        // switch to main game - scene 1 in build order
+        SceneManager.LoadScene(1,LoadSceneMode.Single);
     }
+
     public void QuitGame()
     {
 #if UNITY_STANDALONE

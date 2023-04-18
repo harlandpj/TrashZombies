@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Remy Character Stats
   m_EditorClassIdentifier: 
   characterName: Remy
-  attackDamage: 5
+  attackDamage: 1
   normalSpeed: 6
   sprintSpeed: 12
   eyesightDistance: 40

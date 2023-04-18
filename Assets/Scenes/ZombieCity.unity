@@ -29967,7 +29967,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 636430382}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -36753,14 +36753,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 766342178}
-  m_LocalRotation: {x: -0.22143997, y: -0.64116746, z: 0.23472986, w: 0.69625473}
-  m_LocalPosition: {x: 50.72, y: 10.04, z: -9.28}
-  m_LocalScale: {x: 9.62, y: 0.24, z: 4.44}
+  m_LocalRotation: {x: -0.19667688, y: -0.65307415, z: 0.21955898, w: 0.69757175}
+  m_LocalPosition: {x: 50.72, y: 10.15, z: -9.37}
+  m_LocalScale: {x: 12.04, y: 0.1, z: 4.44}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 543450652761545811}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: -0.421, y: -85.426, z: 37.65}
+  m_LocalEulerAnglesHint: {x: 0.71, y: -86.007, z: 34.281}
 --- !u!65 &766342180
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -36781,7 +36781,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 766342178}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -87440,8 +87440,8 @@ MonoBehaviour:
   CityHealthWarninngDisplay: {fileID: 334959367}
   loseALife: {fileID: 8300000, guid: d1d1e18416e2459448a6dfe503cdccc6, type: 3}
   lifeIcons:
-  - {fileID: 148591028}
   - {fileID: 888756544}
+  - {fileID: 1018609731}
   - {fileID: 1018609731}
 --- !u!114 &1886975964
 MonoBehaviour:
@@ -97631,14 +97631,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2095470397}
-  m_LocalRotation: {x: -0.2193901, y: -0.6399518, z: 0.2377822, w: 0.69698584}
-  m_LocalPosition: {x: 50.67, y: 16.43, z: -9.93}
-  m_LocalScale: {x: 9.62, y: 0.24, z: 4.44}
+  m_LocalRotation: {x: -0.20831196, y: -0.6574359, z: 0.218556, w: 0.6903749}
+  m_LocalPosition: {x: 50.73, y: 16.84, z: -8.93}
+  m_LocalScale: {x: 11.22, y: 0.1, z: 4.44}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 543450652761545811}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: -0.085, y: -85.144, z: 37.753}
+  m_LocalEulerAnglesHint: {x: -0.015, y: -87.205, z: 35.147}
 --- !u!65 &2095470399
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -97659,7 +97659,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2095470397}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

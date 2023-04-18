@@ -342,15 +342,18 @@ public abstract class NPCBaseController : MonoBehaviour
     // move the enemy
     public virtual void MoveEnemy()
     {
-        m_Animator.SetFloat("Speed", 1.5f);
+        if (!GameController.Instance.m_bGameOver)
+        {
+            m_Animator.SetFloat("Speed", 1.5f);
 
-        if (PlayerSeenOrInRange())
-        {
-            MoveTowardsPlayer();
-        }
-        else
-        {
-            Patrol();
+            if (PlayerSeenOrInRange())
+            {
+                MoveTowardsPlayer();
+            }
+            else
+            {
+                Patrol();
+            }
         }
     }
 
@@ -704,7 +707,11 @@ public abstract class NPCBaseController : MonoBehaviour
             throwThis.GetComponent<PickupBase>().SetThrownByNPC(true);
             throwThis.GetComponent<Rigidbody>().useGravity = true;
 
-            throwDirection = Player.transform.position - throwThis.transform.position;
+            // allow some variance to stop multiple thrown objects sticking together on screen
+            throwDirection = Player.transform.position + 
+                new Vector3(0,0.7f + UnityEngine.Random.Range(0,0.3F), 0) 
+                - throwThis.transform.position;
+
             throwThis.GetComponent<Rigidbody>().AddForce(throwDirection * 45, ForceMode.VelocityChange);
         }
     }

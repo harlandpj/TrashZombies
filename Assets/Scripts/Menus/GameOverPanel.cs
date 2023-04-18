@@ -20,8 +20,9 @@ public class GameOverPanel : MonoBehaviour
     public void SwitchToMainMenu()
     {
         // switch to main menu - scene 0 in build order
-        Time.timeScale = 1;
-        SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
+        //SceneManager.LoadScene(0,LoadSceneMode.Single);
+        SceneManager.LoadScene(1);
     }
 
     public void QuitGame()

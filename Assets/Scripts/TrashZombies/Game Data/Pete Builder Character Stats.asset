@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pete Builder Character Stats
   m_EditorClassIdentifier: 
   characterName: Pete Builder
-  attackDamage: 6
+  attackDamage: 1
   normalSpeed: 5
   sprintSpeed: 10
   eyesightDistance: 30

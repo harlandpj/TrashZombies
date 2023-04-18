@@ -49,6 +49,7 @@ namespace TrashZombies.Pickups
             {
                 // fallen thru floor, return pickup to pickup pool
                 bThrownByNPC = false;
+                gameObject.SetActive(false);    
                 PickupPoolManager.Instance.ReturnPickupToPool(gameObject);
             }                
         }
@@ -71,6 +72,9 @@ namespace TrashZombies.Pickups
                 // game running, check who triggered and if player update score        
                 if (other.gameObject.CompareTag("Player") && !hitByPlayer)
                 {
+                    // turn collider off for extra security
+                    gameObject.GetComponent<CapsuleCollider>().enabled = false;
+
                     StartPickupCollected();
                 }
                 else if (Player.transform.position.y - transform.position.y < 0.15f)
@@ -85,10 +89,11 @@ namespace TrashZombies.Pickups
                 }
             }
 
-            if (transform.position.y < -2f)
+            if (transform.position.y < -1f)
             {
                 // return to pool as fell thru floor or maybe stuck in air after being thrown by an NPC
                 bThrownByNPC = false;
+                gameObject.SetActive(false);    
                 PickupPoolManager.Instance.ReturnPickupToPool(gameObject);
             }
         }
@@ -102,11 +107,10 @@ namespace TrashZombies.Pickups
             {
                 gameObject.GetComponent<Rigidbody>().useGravity = true;
             }
-            else
-            {
-                // turn collider off for extra security
-                gameObject.GetComponent<Collider>().enabled = false;
-            }
+            
+            // turn collider off for extra security
+            gameObject.GetComponent<CapsuleCollider>().enabled = false;
+            
 
             // play collect noise
             audioSource.clip = pointsClip;
@@ -134,8 +138,8 @@ namespace TrashZombies.Pickups
             Debug.Log("Pickup Collected!");
 
             // return pickup to pickup pool
+            gameObject.SetActive(false); 
             PickupPoolManager.Instance.ReturnPickupToPool(gameObject);
-            gameObject.SetActive(false);    
         }
     }
 }

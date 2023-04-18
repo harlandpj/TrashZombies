@@ -105,20 +105,21 @@ public class HUDController : MonoBehaviour
             
             switch (GameController.Lives)
             {
+                case 0:
+                    TurnOnLifeIcons(false); 
+                    break;
                 case 1: 
                     HideLifeIcon(1);
+                    HideLifeIcon(2);
                     break;
                 case 2:
                     HideLifeIcon(2);
                     break;
-                case 3:
-                    HideLifeIcon(3);
-                    break;  
             }
 
             GameController.Health = GameController.MaxHealth;
         }
-        else if (GameController.Health == GameController.MaxHealth)
+        else if (GameController.Health == GameController.MaxHealth && GameController.Lives == 3)
         {
             TurnOnLifeIcons();
         }
@@ -149,11 +150,16 @@ public class HUDController : MonoBehaviour
         }
     }
 
-    void StartGameOverRoutine()
+    public void StartGameOverRoutine()
     {
         CancelInvoke("CityWarning");
-        CityHealthWarninngDisplay.SetText("*********** OUT OF TIME - GAME OVER ***********".ToString());
+        
+        GameController.Instance.m_bGameOver = true;
+        TurnOnLifeIcons(false);
+        CityHealthWarninngDisplay.SetText("****************  GAME OVER!  *************".ToString());
+
         Time.timeScale = 0f;
+
         cityHealthCountdown = 180;
         cityHealthCountdownStarted = false;
         

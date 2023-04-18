@@ -10,7 +10,7 @@ using Unity.VisualScripting;
 /// note: The controller gameObject in scene MUST be called "GameController"
 /// </summary>
 ///
-// do a [RequireComponent(typeof(GameController))] for all here too to ensure incorrect setup in editor/runtime?
+// do a [RequireComponent(typeof(GameController))] for all here to to ensure incorrect setup in editor/runtime?
 public class GameController : MonoBehaviour
 {
     /// <summary>
@@ -90,12 +90,10 @@ public class GameController : MonoBehaviour
                 if (value <= maxLives)
                 {
                     m_Lives = value;
-                    HUDController.Instance.HideLifeIcon(m_Lives+1);
                 }
                 else
                 {
                     m_Lives = maxLives;
-                    HUDController.Instance.TurnOnLifeIcons(true);
                 }
             }
             else
@@ -103,12 +101,10 @@ public class GameController : MonoBehaviour
                 if (value <= 0)
                 {
                     m_Lives = 0;
-                    HUDController.Instance.TurnOnLifeIcons(false);
                 }
                 else
                 {
                     m_Lives = value;
-                    HUDController.Instance.HideLifeIcon(m_Lives+1);
                 }
             }
         }
@@ -157,7 +153,7 @@ public class GameController : MonoBehaviour
         // ensure not destroyed on any subsequent scene load
         DontDestroyOnLoad(gameObject);
 
-        LoadUserData(); 
+        ResetOrOnRestartVariables(true);
     }
 
     // reset variables to initial state
@@ -169,11 +165,25 @@ public class GameController : MonoBehaviour
             Score = 0;
             Health= 100;
             CityHealth = 100f;
+            Lives = 3;
+            m_bGameOver = false;
+            LoadUserData();
         }
-        else
-        {
+        else 
+        { 
+            // for later dev
+        }
+    }
 
-        }
+    bool bStartGameOver = false; // started game over routine
+
+    private void Update()
+    {
+        if (Lives == 0 && !bStartGameOver)
+        {
+            bStartGameOver= true;
+            HUDController.Instance.StartGameOverRoutine();
+        }    
     }
 
     [System.Serializable]
@@ -229,4 +239,5 @@ public class GameController : MonoBehaviour
             Debug.Log($"Loading Data from: {Application.persistentDataPath} in savefile.json");
         }
     }
+
 }

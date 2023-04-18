@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Jody Character Stats
   m_EditorClassIdentifier: 
   characterName: Jody
-  attackDamage: 5
+  attackDamage: 1
   normalSpeed: 5
   sprintSpeed: 11
   eyesightDistance: 35
