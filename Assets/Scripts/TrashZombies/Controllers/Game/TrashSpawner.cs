@@ -42,8 +42,8 @@ public class TrashSpawner : MonoBehaviour
     //int trashSpawnInterval = 5; // FOR TESTING
     //int numToSpawnThisLevel = 20; // FOR TESTING
 
-    int trashSpawnInterval = 60; // seconds (more balanced)
-    int numToSpawnThisLevel = 10;
+    int trashSpawnInterval = 45; // seconds (more balanced)
+    int numToSpawnThisLevel = 25;
     
     //int levelNumber; // add later don't have time now!
 
@@ -121,6 +121,7 @@ public class TrashSpawner : MonoBehaviour
 
             dropThis.SetActive(true);
             dropThis.GetComponent<Rigidbody>().useGravity = true;
+            GameController.CityHealth -= 0.1f;
         }
     }
 }

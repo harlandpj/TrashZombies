@@ -126,11 +126,12 @@ namespace TrashZombies.Pickups
             {
                 // only score if we picked it up
                 GameController.Score += pickupStats.PickupValue;
-                GameController.CityHealth += 0.1f;            }
+                GameController.CityHealth += 0.25f;
+            }
             else
             {
-                // reduce health by 1%
-                GameController.Health -=1;
+                // reduce health by 0.1%
+                GameController.Health -=0.1f;
                 bThrownByNPC= false;
             }
 

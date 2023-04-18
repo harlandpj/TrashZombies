@@ -33,19 +33,19 @@ public class GameController : MonoBehaviour
 
     [Header("Player Statistics")]
     [SerializeField]
-    private static int maxHealth = 100;
-    private static int m_Health = 100;
+    private static float maxHealth = 100;
+    private static float m_Health = 100;
 
     [Header("City Statistics")]
     [SerializeField]
     private static float m_CityHealth = 100f;
 
-    public static int MaxHealth
+    public static float MaxHealth
     {
         get => maxHealth;
     }
 
-    public static int Health
+    public static float Health
     {
         get => m_Health;
         set

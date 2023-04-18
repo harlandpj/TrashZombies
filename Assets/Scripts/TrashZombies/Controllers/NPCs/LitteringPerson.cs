@@ -49,8 +49,8 @@ public class LitteringPerson : NPCBaseController
         m_SprintSpeed= LitteringPersonStats.SprintSpeed;
         m_DamageDealt = LitteringPersonStats.AttackDamage;
         m_EyesightDistance = LitteringPersonStats.EyesightDistance;
-        maxHealth = LitteringPersonStats.MaxHealth;
-        m_Health = LitteringPersonStats.MaxHealth; // initially same as max health
+        maxHealth = (float)LitteringPersonStats.MaxHealth;
+        m_Health = (float)LitteringPersonStats.MaxHealth; // initially same as max health
         m_EnemyName = LitteringPersonStats.CharName;
 
         navAgent.speed = m_Speed; // normal speed

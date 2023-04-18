@@ -31,13 +31,13 @@ public abstract class NPCBaseController : MonoBehaviour
     protected AudioClip attackNoise;
 
     [SerializeField]
-    protected int m_Health; // current health
+    protected float m_Health; // current health
 
     [SerializeField]
-    protected int maxHealth; // more than 100% for Boss Enemies
+    protected float maxHealth; // more than 100% for Boss Enemies
 
     // accessors
-    public int Health
+    public float Health
     {
         get => m_Health;
 

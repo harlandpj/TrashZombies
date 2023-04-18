@@ -124,7 +124,7 @@ public class HUDController : MonoBehaviour
             TurnOnLifeIcons();
         }
 
-        PlayerHealth.SetText(GameController.Health.ToString());
+        PlayerHealth.SetText(GameController.Health.ToString("0.00"));
         
         string CityHealthString = GameController.CityHealth.ToString("0.00"); // 2dp
         CityHealthString += " %";
@@ -166,7 +166,9 @@ public class HUDController : MonoBehaviour
         GameController.Instance.SaveUserData();
 
         // load end game scene overlay
-        SceneManager.LoadScene(2, LoadSceneMode.Additive);
+        audioSource.Stop();
+        TurnOnLifeIcons(false); 
+        SceneManager.LoadScene(2/*,LoadSceneMode.Additive*/);
     }
 
     void CityWarning()

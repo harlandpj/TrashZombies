@@ -24,7 +24,7 @@ public class CharacterStats : ScriptableObject
     private float eyesightDistance; // distance character can see (not applicable to Player)
 
     [SerializeField]
-    private int maxHealth; // maximum health points
+    private float maxHealth; // maximum health points
 
     [SerializeField]
     private int attackRecoveryTime; // recovery time after being attacked before can pursue/patrol again
@@ -72,7 +72,7 @@ public class CharacterStats : ScriptableObject
         }
     }
 
-    public int MaxHealth
+    public float MaxHealth
     {
         get
         {
