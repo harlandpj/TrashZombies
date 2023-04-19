@@ -19,7 +19,7 @@ namespace TrashZombies.Pickups
         
         protected AudioSource audioSource;
 
-        private bool hitByPlayer = false;
+        public bool hitByPlayer = false; // reset on rethrowing an object from pool
         private bool bThrownByNPC = false; // this pickup object can also be thrown by an NPC
 
         // accessor
@@ -60,8 +60,14 @@ namespace TrashZombies.Pickups
         protected void OnTriggerEnter(Collider other)
         {
             // not ideal, as any rotating (x,y,z) direction body will simply land at the angle it was at
-            gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-
+            if (!other.gameObject.CompareTag("Ground") ||
+                !other.gameObject.CompareTag("Road") ||
+                (!other.gameObject.CompareTag("WineBottle") && bThrownByNPC))
+            {
+                // don't stop it if these objects collided with
+                gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
+            
             gameObject.transform.position = new Vector3(
                 gameObject.transform.position.x,
                 gameObject.GetComponent<Renderer>().bounds.center.y+0.1f, 
@@ -87,6 +93,13 @@ namespace TrashZombies.Pickups
                         GameController.CityHealth -= 0.1f; // reduce city health!
                     }
                 }
+                else
+                {
+                    // hit something but wasn't player, ground, or roads - so remove dangling in air objects!
+                    bThrownByNPC = false;
+                    gameObject.SetActive(false);
+                    PickupPoolManager.Instance.ReturnPickupToPool(gameObject);
+                }
             }
 
             if (transform.position.y < -1f)
@@ -102,20 +115,21 @@ namespace TrashZombies.Pickups
         {
             // prevent re-collisions giving more points
             hitByPlayer = true;
+            audioSource.clip = pointsClip;
 
             if (bThrownByNPC)
             {
                 gameObject.GetComponent<Rigidbody>().useGravity = true;
+                audioSource.PlayOneShot(pointsClip, 0.6f); // play collected sound
             }
-            
+            else
+            {
+                audioSource.PlayOneShot(pointsClip, 1f);
+            }
+
             // turn collider off for extra security
             gameObject.GetComponent<CapsuleCollider>().enabled = false;
             
-
-            // play collect noise
-            audioSource.clip = pointsClip;
-            audioSource.PlayOneShot(pointsClip, 0.8f); // play collected sound
-
             StartCoroutine(PickupCollected());
         }
 

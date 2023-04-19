@@ -4,7 +4,6 @@ using TrashZombies.Pickups;
 using UnityEngine;
 using Unity.VisualScripting;
 using UnityEngine.EventSystems;
-using TrashZombies.Pickups;
 
 /// <summary>
 /// Wine bottle collectable derived from PickupBase class

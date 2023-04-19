@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class GameOverPanel : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -11,18 +12,24 @@ public class GameOverPanel : MonoBehaviour
         UnityEngine.RenderSettings.skybox = null;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void SwitchToMainMenu()
     {
-        // switch to main menu - scene 0 in build order
+        // can't switch to main menu - scene 0 in build order, due to some sort of
+        // scene unloading bug, so going to main game again instead!
         Time.timeScale = 1f;
-        //SceneManager.LoadScene(0,LoadSceneMode.Single);
-        SceneManager.LoadScene(1);
+        
+        if (HUDController.Instance != null)
+        {
+            HUDController.Instance.SetupInitialHUDValues();
+        }
+
+        if (TrashSpawner.Instance != null)
+        {
+            TrashSpawner.Instance.RestartTrashSpawner();
+        }
+        
+        //SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 
     public void QuitGame()

@@ -36,14 +36,14 @@ public class TrashSpawner : MonoBehaviour
         }
 
         // ensure not destroyed on (**future dev***) any subsequent scene load
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     //int trashSpawnInterval = 5; // FOR TESTING
     //int numToSpawnThisLevel = 20; // FOR TESTING
 
-    int trashSpawnInterval = 45; // seconds (more balanced)
-    int numToSpawnThisLevel = 25;
+    int trashSpawnInterval = 40; // seconds (more balanced)
+    int numToSpawnThisLevel = 30;
     
     //int levelNumber; // add later don't have time now!
 
@@ -54,12 +54,19 @@ public class TrashSpawner : MonoBehaviour
         if (!trashSpawnerInitialised)
         {
             trashSpawnerInitialised = true;
-            InvokeRepeating("StartTrashSpawning", 5f, trashSpawnInterval); 
-            StartTrashSpawning(); // start 1st spawn in 40 secs time
+            InvokeRepeating("StartTrashSpawning", 0f, trashSpawnInterval); 
+            //StartTrashSpawning(); // start 1st spawn
         }
     }
 
-    
+    // Needs to be called on game restart
+    public void RestartTrashSpawner()
+    {
+        trashSpawnerInitialised = true;
+        CancelInvoke("StartTrashSpawning"); // needed on re-entry to scene
+        InvokeRepeating("StartTrashSpawning", 5f, trashSpawnInterval);
+        StartTrashSpawning(); // start 1st spawn in 40 secs time
+    }
 
     // starts trash spawning into scene
     void StartTrashSpawning()

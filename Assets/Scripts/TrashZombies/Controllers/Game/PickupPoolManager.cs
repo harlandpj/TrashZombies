@@ -44,7 +44,7 @@ public class PickupPoolManager : MonoBehaviour
         }
 
         // ensure not destroyed on (**future dev***) any subsequent scene load
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
 
@@ -101,8 +101,6 @@ public class PickupPoolManager : MonoBehaviour
         {
             pickupPoolInitialised = true;
         }
-        
-        int testBreakPoint = 999;
     }
     
     GameObject[] foundPickup = new GameObject[1];

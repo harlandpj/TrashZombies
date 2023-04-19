@@ -11,6 +11,9 @@ TagManager:
   - HighScore
   - PlayerHealth
   - CityHealth
+  - Ground
+  - Roads
+  - WineBottle
   layers:
   - Default
   - TransparentFX

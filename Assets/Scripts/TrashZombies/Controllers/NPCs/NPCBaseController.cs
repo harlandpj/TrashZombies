@@ -705,11 +705,13 @@ public abstract class NPCBaseController : MonoBehaviour
 
             throwThis.SetActive(true);
             throwThis.GetComponent<PickupBase>().SetThrownByNPC(true);
+            throwThis.GetComponent<PickupBase>().hitByPlayer = false; // just in case
             throwThis.GetComponent<Rigidbody>().useGravity = true;
 
             // allow some variance to stop multiple thrown objects sticking together on screen
             throwDirection = Player.transform.position + 
-                new Vector3(0,0.7f + UnityEngine.Random.Range(0,0.3F), 0) 
+                new Vector3(0 + UnityEngine.Random.Range(0, 0.01f), 
+                0.9f + UnityEngine.Random.Range(0,0.3f), UnityEngine.Random.Range(0, 0.01f))
                 - throwThis.transform.position;
 
             throwThis.GetComponent<Rigidbody>().AddForce(throwDirection * 45, ForceMode.VelocityChange);

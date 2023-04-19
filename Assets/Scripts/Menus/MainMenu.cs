@@ -17,20 +17,25 @@ public class MainMenu : MonoBehaviour
         audioSource.Play();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-       if (!audioSource.isPlaying)
-       {
-            audioSource.Play(); 
-            HUDController.Instance.TurnOnLifeIcons(false);
-       }
-    }
-
     public void SwitchToGameScene()
     {
+        if (HUDController.Instance != null)
+        {
+            HUDController.Instance.SetupInitialHUDValues();
+        }
+
+        if (TrashSpawner.Instance != null) 
+        { 
+            TrashSpawner.Instance.RestartTrashSpawner();    
+        }
+
+        if (GameController.Instance != null)
+        {
+            GameController.Instance.ResetOrOnRestartVariables(true);
+        }
+
         // switch to main game - scene 1 in build order
-        SceneManager.LoadScene(1,LoadSceneMode.Single);
+        SceneManager.LoadScene(1);
     }
 
     public void QuitGame()

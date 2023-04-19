@@ -150,29 +150,21 @@ public class GameController : MonoBehaviour
             Instance = this;
         }
 
-        // ensure not destroyed on any subsequent scene load
-        DontDestroyOnLoad(gameObject);
-
         ResetOrOnRestartVariables(true);
     }
 
     // reset variables to initial state
-    private void ResetOrOnRestartVariables(bool newGame)
+    public void ResetOrOnRestartVariables(bool newGame =true)
     {
-        if (newGame)
-        {
-            // reset player score
-            Score = 0;
-            Health= 100;
-            CityHealth = 100f;
-            Lives = 3;
-            m_bGameOver = false;
-            LoadUserData();
-        }
-        else 
-        { 
-            // for later dev
-        }
+        // reset player score
+        Score = 0;
+        Health = 100f;
+        CityHealth = 100f;
+        m_bGameOver = false;
+        LoadUserData();
+
+        HUDController.Instance.TurnOnLifeIcons(true);
+        Lives = 3;
     }
 
     bool bStartGameOver = false; // started game over routine
@@ -182,6 +174,7 @@ public class GameController : MonoBehaviour
         if (Lives == 0 && !bStartGameOver)
         {
             bStartGameOver= true;
+            HUDController.Instance.ShowPlayerInfo(false);   
             HUDController.Instance.StartGameOverRoutine();
         }    
     }
