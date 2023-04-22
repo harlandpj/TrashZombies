@@ -198,11 +198,11 @@ public class GameController : MonoBehaviour
             // new high score
             data.Score = Score;
 
-            if (PlayerName != null)
+            if (HiPlayerName != null)
             {
-                if (PlayerName.Length != 0)
+                if (HiPlayerName.Length != 0)
                 {
-                    data.PlayName = PlayerName;
+                    data.PlayName = HiPlayerName;
                 }
             }
             else
@@ -210,12 +210,7 @@ public class GameController : MonoBehaviour
                 data.PlayName = "NO NAME!";
             }
         }
-        else
-        {
-            data.Score = HighScore;
-            data.PlayName = PlayerName;
-        }
-
+        
         // convert to JSON format and save to file
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
@@ -230,12 +225,12 @@ public class GameController : MonoBehaviour
         {
             string json = File.ReadAllText(path);
             SaveData data = JsonUtility.FromJson<SaveData>(json);
-            PlayerName = data.PlayName;
+            HiPlayerName = data.PlayName;
 
             // high scoring player
-            if (PlayerName == null)
+            if (HiPlayerName == null)
             {
-                PlayerName= "No Name!".ToString();  
+                HiPlayerName = "No Name!".ToString();  
             }
 
             HighScore = data.Score;

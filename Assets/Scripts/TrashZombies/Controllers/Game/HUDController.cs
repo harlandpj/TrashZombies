@@ -224,6 +224,7 @@ public class HUDController : MonoBehaviour
         if (GameController.Score > GameController.HighScore)
         {
             PlayerHiScore.SetText(GameController.Score.ToString());
+            HiPlayerName.SetText("CURRENT!".ToString());
         }
     }
 
