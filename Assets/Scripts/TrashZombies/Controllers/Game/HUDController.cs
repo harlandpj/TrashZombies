@@ -17,17 +17,20 @@ public class HUDController : MonoBehaviour
     private TMP_Text PlayerScore; // players score
     [SerializeField]
     private TMP_Text PlayerHiScore; // players score
-    
-    //private TMP_Text PlayerLives; // players lives
-
+    [SerializeField]
+    private TMP_Text HiPlayerName; // high player name
     [SerializeField]
     private TMP_Text PlayerHealth; // players health
     [SerializeField]
     private TMP_Text CityHealth; // city health (starts off low)
+    [SerializeField]
+    private TMP_Text CityHealthWarningDisplay; // comes on when health is zero / timer started
 
     // for turning on/off later
     [SerializeField]
     private TMP_Text highScoreText;
+    [SerializeField]
+    private TMP_Text highPlayerNameText;
     [SerializeField]
     private TMP_Text playerScoreText;
     [SerializeField]
@@ -35,24 +38,20 @@ public class HUDController : MonoBehaviour
     [SerializeField]
     private TMP_Text cityHealthText;
 
-    //[SerializeField]
-    //private TMP_Text HiPlayerName; // high score players name
-
-    [SerializeField]
-    private TMP_Text CityHealthWarningDisplay; // comes on when health is zero / timer started
-
-    // HUD Lives left "square" round lives and underscores elsewhere
+    // HUD Lives left, the "square" round lives box and underscores elsewhere
     [Tooltip("This is all RED objects used to underline Player attributes on HUD display")]
     [SerializeField]
     private GameObject[] HUDGraphicElements = new GameObject[8];
 
-    int cityHealthCountdown = 180; // 3 minute warning!
+    int cityHealthCountdown = 180; // 3 minute warning
     bool cityHealthCountdownStarted = false;
 
     [SerializeField]
     private AudioClip loseALife;
+
     private AudioSource audioSource;
 
+    // accessor
     public static HUDController Instance { get; private set; }
 
     private void Awake()
@@ -60,6 +59,8 @@ public class HUDController : MonoBehaviour
         if (Instance != null && Instance != this)
         {
             Destroy(this);
+            ShowPlayerInfo(true);
+            InvokeRepeating("UpdatePlayerStats", 0, 1);
             return;
         }
         else
@@ -68,12 +69,13 @@ public class HUDController : MonoBehaviour
         }
 
         // ensure not destroyed on any subsequent scene load
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         audioSource = gameObject.GetComponent<AudioSource>();
 
         // needed for restart/reload situation
         ShowPlayerInfo(true);
+
         InvokeRepeating("UpdatePlayerStats", 0, 1);
     }
 
@@ -83,14 +85,18 @@ public class HUDController : MonoBehaviour
         PlayerScore.enabled = onOff;
         PlayerHiScore.enabled = onOff;
         PlayerHealth.enabled = onOff;
+        HiPlayerName.enabled = onOff;   
+        PlayerHiScore.enabled = onOff;
         CityHealth.enabled = onOff; 
         playerScoreText.enabled= onOff;
         PlayerHealthText.enabled= onOff;
         cityHealthText.enabled= onOff;  
         highScoreText.enabled= onOff;
-        CityHealthWarningDisplay.enabled= onOff;    
+        CityHealthWarningDisplay.enabled= onOff;
 
         // turn on graphics icons
+        TurnOnLifeIcons(true);
+
         for (int i =0; i < HUDGraphicElements.Length; i++)
         {
             if (HUDGraphicElements[i] != null)
@@ -99,6 +105,35 @@ public class HUDController : MonoBehaviour
             }
         }
 
+        if (GameController.Score > GameController.HighScore)
+        {
+            PlayerHiScore.SetText(GameController.Score.ToString());
+        }
+        else
+        {
+            PlayerHiScore.SetText(GameController.HighScore.ToString());
+
+            if (GameController.Instance != null)
+            {
+                if (GameController.HiPlayerName != null)
+                {
+                    if (GameController.HiPlayerName.Length > 0)
+                    {
+                        HiPlayerName.SetText(GameController.HiPlayerName.ToString());
+                    }
+                    else
+                    {
+                        HiPlayerName.SetText("NO NAME!");
+                    }
+                }
+                else
+                {
+                    HiPlayerName.SetText("NO NAME!");
+                }
+            }
+        }
+
+        // clear old player info
         ClearPreviousInfo();    
     }
 
@@ -108,13 +143,12 @@ public class HUDController : MonoBehaviour
         PlayerHealth.SetText("      ".ToString());
         CityHealth.SetText("       ".ToString());
         CityHealthWarningDisplay.SetText("                                                                     ".ToString());
-
     }
 
     public void OnGameQuit()
     {
         // quit button action
-        //GameController.Instance.SaveUserData();
+        GameController.Instance.SaveUserData();
 
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
@@ -127,17 +161,8 @@ public class HUDController : MonoBehaviour
     {
         // updates player stats, done every second - may use events later!
         Debug.Log("Updating Player Stats");
-
+    
         PlayerScore.SetText(GameController.Score.ToString());
-
-        if (GameController.Score > GameController.HighScore)
-        {
-            PlayerHiScore.SetText(GameController.Score.ToString());
-        }
-        else
-        {
-            PlayerHiScore.SetText(GameController.HighScore.ToString());
-        }
         
         // turn off life icon
         if (GameController.Health <= 0)
@@ -161,7 +186,8 @@ public class HUDController : MonoBehaviour
 
             GameController.Health = GameController.MaxHealth;
         }
-        else if (GameController.Health == GameController.MaxHealth && GameController.Lives == 3)
+        else if (GameController.Health == GameController.MaxHealth && 
+            GameController.Lives == 3)
         {
             // have come here from new game or a restart
             TurnOnLifeIcons(true);
@@ -194,6 +220,11 @@ public class HUDController : MonoBehaviour
         {
             StartGameOverRoutine();
         }
+
+        if (GameController.Score > GameController.HighScore)
+        {
+            PlayerHiScore.SetText(GameController.Score.ToString());
+        }
     }
 
     public void StartGameOverRoutine()
@@ -212,8 +243,6 @@ public class HUDController : MonoBehaviour
 
         // load end game scene overlay
         audioSource.Stop();
-        TurnOnLifeIcons(false);
-        Time.timeScale = 0f;
         SceneManager.LoadScene(2); // end game menu
     }
 
@@ -227,7 +256,7 @@ public class HUDController : MonoBehaviour
     public void SetupInitialHUDValues()
     {
         GameController.CityHealth = 100f;
-        GameController.Health = 100;
+        GameController.Health = 100f;
         GameController.Score = 0;
 
         PlayerHealth.SetText("100".ToString());
@@ -238,7 +267,7 @@ public class HUDController : MonoBehaviour
         CityHealthString += " %";
         CityHealth.SetText(CityHealthString);   
         
-        TurnOnLifeIcons();
+        TurnOnLifeIcons(true);
     }
 
     public void TurnOnLifeIcons(bool onOff = true)
@@ -246,7 +275,10 @@ public class HUDController : MonoBehaviour
         // reset icons
         for (int i=0; i < lifeIcons.Length-1; i++)
         {
-            lifeIcons[i].SetActive(onOff);
+            if (lifeIcons[i] != null)
+            {
+                lifeIcons[i].SetActive(onOff);
+            }
         }
     }
 

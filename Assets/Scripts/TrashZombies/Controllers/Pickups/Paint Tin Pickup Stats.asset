@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Paint Tin Pickup Stats
   m_EditorClassIdentifier: 
   pickupName: Paint Tin
-  pickupValue: 3
+  pickupValue: 10
   icon: {fileID: 0}

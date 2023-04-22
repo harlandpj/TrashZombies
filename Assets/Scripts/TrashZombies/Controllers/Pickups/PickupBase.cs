@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -21,7 +23,8 @@ namespace TrashZombies.Pickups
 
         public bool hitByPlayer = false; // reset on rethrowing an object from pool
         private bool bThrownByNPC = false; // this pickup object can also be thrown by an NPC
-
+        private Stopwatch timeSpawned = new Stopwatch();
+        private TimeSpan expiryTime = new TimeSpan(0, 0, 2); // allow 3 seconds after thrown
         // accessor
         public PickupStats GetPickupStats()
         {
@@ -33,21 +36,24 @@ namespace TrashZombies.Pickups
             bThrownByNPC = npcThrow;
         }
 
-        protected void Awake()
+        protected virtual void Awake()
         {
             audioSource = GetComponent<AudioSource>();
             Player = GameObject.FindGameObjectWithTag("Player");
+            timeSpawned.Start();  // time we spawned
         }
 
         // player
         GameObject Player;
         bool hitTriggerOnce = false;
 
+        // remove thrown object if fallen thru floor mesh or expired
         private void Update()
         {
-            if (transform.position.y < -2f)
+            if (transform.position.y < -2f || 
+                ((timeSpawned.Elapsed.Seconds >= expiryTime.TotalSeconds) && bThrownByNPC))
             {
-                // fallen thru floor, return pickup to pickup pool
+                // fallen thru floor, or maybe "stacked" in air return pickup to pickup pool
                 bThrownByNPC = false;
                 gameObject.SetActive(false);    
                 PickupPoolManager.Instance.ReturnPickupToPool(gameObject);
@@ -57,7 +63,7 @@ namespace TrashZombies.Pickups
         // Stop object falling through terrain mesh
         // Haven't found any other solution - mesh thickness / continuous collider checking etc
         // as need it to have a rigid body and use gravity, but Unity mesh detection not good enough
-        protected void OnTriggerEnter(Collider other)
+        protected virtual void OnTriggerEnter(Collider other)
         {
             // not ideal, as any rotating (x,y,z) direction body will simply land at the angle it was at
             if (!other.gameObject.CompareTag("Ground") ||
@@ -120,7 +126,7 @@ namespace TrashZombies.Pickups
             if (bThrownByNPC)
             {
                 gameObject.GetComponent<Rigidbody>().useGravity = true;
-                audioSource.PlayOneShot(pointsClip, 0.6f); // play collected sound
+                audioSource.PlayOneShot(pointsClip, 0.3f); // play collected sound
             }
             else
             {
@@ -150,7 +156,7 @@ namespace TrashZombies.Pickups
             }
 
             yield return new WaitForSeconds(0.5f);
-            Debug.Log("Pickup Collected!");
+            UnityEngine.Debug.Log("Pickup Collected!");
 
             // return pickup to pickup pool
             gameObject.SetActive(false); 

@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour
 
     // player and other statistics
     public static string PlayerName;
+    public static string HiPlayerName;
     public static int HighScore;
     public static int Score;
 
@@ -79,6 +80,7 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private static readonly int maxLives = 3;  // maximum lives
     private static int m_Lives = maxLives;
+    bool bStartGameOver = false; // started game over routine
 
     public static int Lives
     {
@@ -143,6 +145,7 @@ public class GameController : MonoBehaviour
         if (Instance != null && Instance != this)
         {
             Destroy(this);
+            ResetOrOnRestartVariables(true);
             return;
         }
         else
@@ -161,13 +164,13 @@ public class GameController : MonoBehaviour
         Health = 100f;
         CityHealth = 100f;
         m_bGameOver = false;
-        LoadUserData();
-
-        HUDController.Instance.TurnOnLifeIcons(true);
         Lives = 3;
+        
+        LoadUserData();
+        HUDController.Instance.TurnOnLifeIcons(true);
     }
 
-    bool bStartGameOver = false; // started game over routine
+    
 
     private void Update()
     {
@@ -182,7 +185,7 @@ public class GameController : MonoBehaviour
     [System.Serializable]
     class SaveData
     {
-        public string PlayName; // players name
+        public string PlayName; // high scoring players name
         public int Score; // players high score
     }
 
@@ -204,7 +207,7 @@ public class GameController : MonoBehaviour
             }
             else
             {
-                data.PlayName = "No Name";
+                data.PlayName = "NO NAME!";
             }
         }
         else
@@ -228,6 +231,13 @@ public class GameController : MonoBehaviour
             string json = File.ReadAllText(path);
             SaveData data = JsonUtility.FromJson<SaveData>(json);
             PlayerName = data.PlayName;
+
+            // high scoring player
+            if (PlayerName == null)
+            {
+                PlayerName= "No Name!".ToString();  
+            }
+
             HighScore = data.Score;
             Debug.Log($"Loading Data from: {Application.persistentDataPath} in savefile.json");
         }

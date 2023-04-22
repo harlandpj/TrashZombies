@@ -14,12 +14,12 @@ public class WineBottlePickup : PickupBase
     [SerializeField]
     AudioClip bottleDrop;
 
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
         Debug.Log("Entered OnTriggerEnter in Wine Bottle Pickup!");

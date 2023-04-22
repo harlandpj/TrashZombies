@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Wine Bottle Pickup Stats
   m_EditorClassIdentifier: 
   pickupName: Wine Bottle
-  pickupValue: 5
+  pickupValue: 15
   icon: {fileID: 0}

@@ -30,7 +30,7 @@ public class LitteringPerson : NPCBaseController
         m_EnemyName = "Litterer";
     }
 
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
         audioSource = gameObject.GetComponent<AudioSource>();

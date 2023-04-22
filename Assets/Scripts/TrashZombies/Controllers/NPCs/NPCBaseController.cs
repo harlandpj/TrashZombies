@@ -122,7 +122,7 @@ public abstract class NPCBaseController : MonoBehaviour
     {
     }
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         SetupEnemy();
     }

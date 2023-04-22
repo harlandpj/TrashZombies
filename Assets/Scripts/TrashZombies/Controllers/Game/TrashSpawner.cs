@@ -54,8 +54,7 @@ public class TrashSpawner : MonoBehaviour
         if (!trashSpawnerInitialised)
         {
             trashSpawnerInitialised = true;
-            InvokeRepeating("StartTrashSpawning", 0f, trashSpawnInterval); 
-            //StartTrashSpawning(); // start 1st spawn
+            InvokeRepeating("StartTrashSpawning", 10f, trashSpawnInterval); 
         }
     }
 
