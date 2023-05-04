@@ -15,6 +15,11 @@ TagManager:
   - Roads
   - WineBottle
   - HighPlayerName
+  - Model
+  - Audio
+  - Images
+  - Package
+  - Audio 2
   layers:
   - Default
   - TransparentFX

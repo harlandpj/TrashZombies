@@ -26,7 +26,7 @@ public class MainMenu : MonoBehaviour
 
         if (TrashSpawner.Instance != null) 
         { 
-            TrashSpawner.Instance.RestartTrashSpawner();    
+            TrashSpawner.Instance.RestartTrashSpawner();   
         }
 
         if (GameController.Instance != null)
@@ -36,6 +36,12 @@ public class MainMenu : MonoBehaviour
 
         // switch to main game - scene 1 in build order
         SceneManager.LoadScene(1);
+    }
+
+    public void SwitchToCredits()
+    {
+        // switch to credits scene
+        SceneManager.LoadScene(3);
     }
 
     public void QuitGame()

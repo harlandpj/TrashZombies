@@ -62,9 +62,26 @@ crashlytics-build.properties
 #
 ## PUT IGNORES for ALL THIRD PARTY ASSET FOLDERS HERE (these need to be downloaded from Unity Asset Store - especially 1.6GB "Terrain Asset Samples" folder)
 #
+/Assets/ExternalAssets/AllSkyFree/*
+/Assets/ExternalAssets/Asphalt_materials/*
+/Assets/ExternalAssets/Conifers\ [BOTD]/*
+/Assets/ExternalAssets/Free/*
+/Assets/ExternalAssets/HurlyBurly/*
+/Assets/ExternalAssets/Medieval\ Bridge/*
+/Assets/ExternalAssets/ModularLowPolyStreetsFree/*
+/Assets/ExternalAssets/Nature\ Low-Poly\ Pack\ By\ TexTheMess/*
+/Assets/ExternalAssets/PBR_Grass_Textures/*
+/Assets/ExternalAssets/Rocks\ and\ Boulders\ 2/*
+/Assets/ExternalAssets/RPG_FPS_game_assets_industrial/*
+/Assets/ExternalAssets/UnitySoftware/TerrainSampleAssets/*
+/Assets/ExternalAssets/UnitySoftware/TextMesh\ Pro/*
+
+# These here JUST IN CASE you forgot after downloading from Asset Store
+# /Assets/
 /Assets/AllSkyFree/*
 /Assets/Asphalt_materials/*
 /Assets/Conifers\ [BOTD]/*
+/Assets/Free/*
 /Assets/HurlyBurly/*
 /Assets/Medieval\ Bridge/*
 /Assets/ModularLowPolyStreetsFree/*
@@ -76,8 +93,6 @@ crashlytics-build.properties
 /Assets/TextMesh\ Pro/*
 
 
-# /Assets/
-
 # META FILE SECTION SHOULD BE HERE AS GIT PROCESSES GITIGNORE file SEQUENTIALLY (I THINK)
 #
 #  - ENSURE YOU DON'T IGNORE META FILES WHEN IGNORING ASSET FOLDERS
@@ -85,9 +100,26 @@ crashlytics-build.properties
 #  - Note use of "BACKSLASH and SPACE" escape sequence in filepaths that have spaces in directory name!
 #    to ensure processed correctly
 
+!/Assets/ExternalAssets/AllSkyFree/*.meta
+!/Assets/ExternalAssets/Asphalt_materials/*.meta
+!/Assets/ExternalAssets/Conifers\ [BOTD]/*.meta
+!/Assets/ExternalAssets/Free/*.meta
+!/Assets/ExternalAssets/HurlyBurly/*.meta
+!/Assets/ExternalAssets/Medieval\ Bridge/*.meta
+!/Assets/ExternalAssets/ModularLowPolyStreetsFree/*.meta
+!/Assets/ExternalAssets/Nature\ Low-Poly\ Pack\ By\ TexTheMess/*.meta
+!/Assets/ExternalAssets/PBR_Grass_Textures/*.meta
+!/Assets/ExternalAssets/Rocks\ and\ Boulders\ 2/*.meta
+!/Assets/ExternalAssets/RPG_FPS_game_assets_industrial/*.meta
+!/Assets/ExternalAssets/UnitySoftware/TerrainSampleAssets/*.meta
+!/Assets/ExternalAssets/UnitySoftware/TextMesh\ Pro/*.meta
+
+# These here JUST IN CASE you forgot after downloading from Asset Store
+
 !/Assets/AllSkyFree/*.meta
 !/Assets/Asphalt_materials/*.meta
 !/Assets/Conifers\ [BOTD]/*.meta
+!/Assets/Free/*.meta
 !/Assets/HurlyBurly/*.meta
 !/Assets/Medieval\ Bridge/*.meta
 !/Assets/ModularLowPolyStreetsFree/*.meta
@@ -97,7 +129,6 @@ crashlytics-build.properties
 !/Assets/RPG_FPS_game_assets_industrial/*.meta
 !/Assets/TerrainSampleAssets/*.meta
 !/Assets/TextMesh\ Pro/*.meta
-
 
 
 
